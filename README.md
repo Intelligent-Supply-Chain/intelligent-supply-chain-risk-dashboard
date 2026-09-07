@@ -265,3 +265,45 @@ Intelligent_supply_chain/
 ├── .gitignore
 │
 └── README.md
+
+---
+
+## 🖥️ Dashboard Screenshots
+
+### 1. Dashboard Overview
+
+The main dashboard provides an overall view of supply chain risk, including total parts, immediate action parts, high-priority parts, monitored parts, and average risk score.
+
+![Dashboard Overview](screenshots/dashboard_overview.png)
+
+### 2. Risk Category Distribution
+
+This visualization shows the distribution of parts across different risk categories.
+
+![Risk Category Distribution](screenshots/risk_distribution.png)
+
+### 3. Immediate Action Parts
+
+Parts classified as **Immediate Action** are highlighted for urgent investigation and corrective action.
+
+![Immediate Action Parts](screenshots/immediate_action.png)
+
+### 4. High Priority Parts
+
+High-priority parts are displayed along with their suppliers and predicted risk scores.
+
+![High Priority Parts](screenshots/high_priority.png)
+
+### 5. Supplier Risk Analysis
+
+This section identifies suppliers with higher average and maximum risk levels.
+
+![Supplier Risk Analysis](screenshots/supplier_risk.png)
+
+### 6. Business Recommendations
+
+The dashboard provides actionable recommendations based on the predicted risk category.
+
+![Business Recommendations](screenshots/business_recommendations.png)
+
+---
