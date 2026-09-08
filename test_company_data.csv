@@ -1,0 +1,5 @@
+part_id,inventory,supplier_id
+P001,100.0,SUP01
+P002,,SUP02
+P003,300.0,SUP03
+P003,300.0,SUP03
