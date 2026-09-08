@@ -1,309 +1,149 @@
 # Intelligent Supply Chain Risk & Demand Analytics System
 
-An end-to-end data analytics and machine learning project designed to identify supply chain risks at the part and supplier level.
+## Problem Statement
 
-The system analyzes demand, inventory, backorders, supplier performance, lead times, quality incidents, and part criticality to calculate risk scores and classify parts into different risk categories.
+Supply chains are affected by demand fluctuations, inventory shortages, supplier delays, backorders, quality issues and long lead times. These factors can increase operational risk and negatively affect business performance.
 
-## 🚀 Live Dashboard
+The Intelligent Supply Chain Risk & Demand Analytics System is an AI and data-driven dashboard designed to identify, analyze and monitor supply-chain risks at part and supplier levels.
 
-Access the deployed Streamlit dashboard here:
-
-https://intelligent-supply-chain-risk-dashboard-nc8rodv4utmpbtl5e3pp4q.streamlit.app
+The system combines rule-based risk analysis with machine learning predictions to generate a Hybrid Risk Score for more comprehensive risk assessment.
 
 ---
 
-## 📌 Project Objective
+## Key Features
 
-The main objective of this project is to build an intelligent supply chain risk monitoring system that helps organizations:
-
-- Identify high-risk parts
-- Detect parts requiring immediate action
-- Monitor supplier performance
-- Analyze inventory and demand risks
-- Identify potential supply chain disruptions
-- Support data-driven business decisions
-
----
-
-## 🏗️ Project Architecture
-
-The project follows an end-to-end data analytics and machine learning workflow:
-
-Raw Data
-↓
-Data Cleaning & Preprocessing
-↓
-Feature Engineering
-↓
-Risk Feature Calculation
-↓
-Machine Learning Model
-↓
-Risk Prediction
-↓
-Final Risk Analysis
-↓
-Streamlit Dashboard
+- Company-specific supply-chain CSV upload
+- Automatic column detection and mapping
+- Data validation and quality checks
+- Adaptive rule-based risk scoring
+- Machine Learning based risk prediction
+- Hybrid Risk Score combining rule-based and ML predictions
+- Risk categorization into:
+  - Normal
+  - Monitor
+  - High Priority
+  - Immediate Action
+- Part-level risk analysis
+- Supplier-level risk analysis
+- Identification of major risk drivers
+- Dynamic business recommendations
+- Interactive Streamlit dashboard
+- Risk filtering by category and supplier
+- Top high-risk parts identification
+- Risk score distribution visualization
+- CSV export of risk predictions
 
 ---
 
-## 📊 Datasets
+## Risk Factors
 
-The project uses multiple supply chain datasets, including:
+The system analyzes multiple supply-chain risk factors, including:
 
-### Parts Master Data
-
-Contains information about:
-
-- Part ID
-- Part family
-- Criticality class
-- Unit cost
-- Lead time
-- Primary supplier
-- Supplier risk class
-- Repairability
-- Shelf life
-
-### Demand & Forecast Data
-
-Contains:
-
-- Demand history
-- Forecast information
-- Site information
-- Forecast type
-- Consumption patterns
-
-### Purchase Order Data
-
-Contains:
-
-- Purchase order information
-- Order dates
-- Supplier information
-- Delivery performance
-- Delay information
-
-### Quality Incident Data
-
-Contains:
-
-- Quality incidents
-- Defect severity
-- Scrap information
-- Incident dates
+- Demand Risk
+- Inventory Risk
+- Backorder Risk
+- Lead Time Risk
+- Supplier Delivery Risk
+- Quality Risk
+- Stock Coverage Risk
+- Delivery Delay Risk
+- Criticality Risk
+- Cost Risk
 
 ---
 
-## ⚙️ Key Features
+## Hybrid Risk Model
 
-### 1. Demand Risk Analysis
+The final Hybrid Risk Score combines the rule-based risk score and the machine-learning risk score.
 
-Analyzes demand patterns using:
+The current configuration uses:
 
-- Average demand
-- Demand standard deviation
-- Total demand
-- Maximum demand
+- 40% Rule-Based Risk Score
+- 60% Machine Learning Risk Score
 
-### 2. Inventory Risk Analysis
+The resulting Hybrid Risk Score is normalized between 0 and 1.
 
-Evaluates:
+---
 
-- Average inventory
+## Risk Categories
+
+| Risk Score | Category |
+|------------|----------|
+| 0.00 - 0.24 | Normal |
+| 0.25 - 0.49 | Monitor |
+| 0.50 - 0.74 | High Priority |
+| 0.75 - 1.00 | Immediate Action |
+
+The dashboard also allows the user to customize these thresholds.
+
+---
+
+## Dataset
+
+The system is designed to work with company supply-chain data provided in CSV format.
+
+### Required Information
+
+- Part / Material ID
+- Supplier / Vendor ID
+- Inventory / Stock on Hand
+- Demand / Monthly Demand
+- Supplier Lead Time
+
+### Optional Information
+
 - Backorders
-- Blocked inventory
-- Inventory coverage
+- Defect Rate
+- Delivery Delay
+- Criticality
+- Unit Cost
 
-### 3. Supplier Risk Analysis
-
-Evaluates supplier performance using:
-
-- Delivery delays
-- Late delivery rate
-- Fill rate
-- Supplier risk score
-
-### 4. Quality Risk Analysis
-
-Considers:
-
-- Number of quality incidents
-- Scrap quantity
-- Defect severity
-
-### 5. Part Risk Analysis
-
-Combines multiple risk factors including:
-
-- Demand risk
-- Inventory risk
-- Backorder risk
-- Supplier delivery risk
-- Lead-time risk
-- Quality risk
-- Criticality risk
-- Cost risk
-
-### 6. Machine Learning Risk Prediction
-
-A trained machine learning model predicts the risk score for each part.
-
-The prediction system classifies parts into:
-
-- Normal
-- Monitor
-- High Priority
-- Immediate Action
+The dashboard automatically detects and maps common company-specific column names to standardized columns.
 
 ---
 
-## 📈 Final Risk Distribution
+## Machine Learning
 
-The final prediction dataset contains 300 parts.
+The system uses a trained machine-learning model to generate ML-based risk predictions.
 
-| Risk Category | Number of Parts |
-|---|---:|
-| Normal | 40 |
-| Monitor | 176 |
-| High Priority | 82 |
-| Immediate Action | 2 |
+The trained model and preprocessing objects are stored in the `models` directory.
 
-The system identifies **2 parts requiring Immediate Action** and **82 High Priority parts**.
+Files include:
 
----
+- `best_risk_model.pkl`
+- `risk_scaler.pkl`
+- `model_features.pkl`
 
-## 🚨 Immediate Action Parts
+The ML prediction pipeline:
 
-The current analysis identifies:
-
-| Part ID | Supplier | Predicted Risk |
-|---|---|---:|
-| P00264 | SUP033 | 0.7805 |
-| P00294 | SUP033 | 0.7625 |
-
-These parts should receive immediate attention during supply chain risk assessment.
+1. Loads the trained model.
+2. Converts available company data into numerical features.
+3. Creates the required model features.
+4. Applies the trained scaler.
+5. Generates ML risk predictions.
+6. Converts predictions into risk categories.
 
 ---
 
-## 🏭 Supplier Risk Analysis
+## Rule-Based Risk Engine
 
-The system also performs supplier-wise risk analysis.
+The rule-based risk engine evaluates available supply-chain risk factors and calculates an adaptive combined risk score.
 
-Important supplier-level metrics include:
+The system dynamically normalizes risk-factor weights depending on which risk factors are available in the uploaded dataset.
 
-- Total parts supplied
-- Average risk
-- Maximum risk
-- Immediate Action parts
-- High Priority parts
-
-For example, supplier `SUP033` has the highest average risk among the analyzed suppliers and is associated with both Immediate Action parts.
+This allows the dashboard to work with different company datasets without requiring every optional field.
 
 ---
 
-## 💡 Business Recommendations
+## Hybrid Risk Analysis
 
-### Immediate Action
-
-Review high-risk parts and their associated suppliers immediately.
-
-### High Priority
-
-Increase safety stock and closely monitor supplier delivery performance.
-
-### Monitor
-
-Continue monitoring demand, inventory, quality, and supplier performance.
-
-### Normal
-
-Continue normal inventory and supplier monitoring.
-
----
-
-## 🛠️ Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Plotly
-- Streamlit
-- Jupyter Notebook
-- Git & GitHub
-
----
-
-## 📁 Project Structure
+The system combines:
 
 ```text
-Intelligent_supply_chain/
-│
-├── app.py
-│
-├── data/
-│   └── final_risk_predictions.csv
-│
-├── models/
-│   ├── trained_model
-│   ├── scaler
-│   └── feature_list
-│
-├── src/
-│   ├── data preprocessing
-│   ├── feature engineering
-│   ├── risk analysis
-│   └── model inference
-│
-├── sql/
-│   └── SQL scripts
-│
-├── requirements.txt
-│
-├── .gitignore
-│
-└── README.md
-
----
-
-## 🖥️ Dashboard Screenshots
-
-### 1. Dashboard Overview
-
-The main dashboard provides an overall view of supply chain risk, including total parts, immediate action parts, high-priority parts, monitored parts, and average risk score.
-
-![Dashboard Overview](screenshots/dashboard_overview.png)
-
-### 2. Risk Category Distribution
-
-This visualization shows the distribution of parts across different risk categories.
-
-![Risk Category Distribution](screenshots/risk_distribution.png)
-
-### 3. Immediate Action Parts
-
-Parts classified as **Immediate Action** are highlighted for urgent investigation and corrective action.
-
-![Immediate Action Parts](screenshots/immediate_action.png)
-
-### 4. High Priority Parts
-
-High-priority parts are displayed along with their suppliers and predicted risk scores.
-
-![High Priority Parts](screenshots/high_priority.png)
-
-### 5. Supplier Risk Analysis
-
-This section identifies suppliers with higher average and maximum risk levels.
-
-![Supplier Risk Analysis](screenshots/supplier_risk.png)
-
-### 6. Business Recommendations
-
-The dashboard provides actionable recommendations based on the predicted risk category.
-
-![Business Recommendations](screenshots/business_recommendations.png)
-
----
+Rule-Based Risk Score
+            +
+Machine Learning Risk Score
+            ↓
+      Hybrid Risk Score
+            ↓
+       Risk Category
