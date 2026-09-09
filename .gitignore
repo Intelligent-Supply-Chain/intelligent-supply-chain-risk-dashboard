@@ -1,4 +1,25 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# macOS
 .DS_Store
+
+# VS Code
+.vscode/
+
+# Temporary files
+tempCodeRunnerFile.py
+*.tmp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
